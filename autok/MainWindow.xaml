@@ -1,0 +1,92 @@
+﻿<Window x:Class="autok.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:autok"
+        mc:Ignorable="d"
+        Title="Járműnyilvántartás" Height="450" Width="1000">
+    <Window.Resources>
+        <local:Lejarat x:Key="Lejarat"/>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Width" Value="200"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Margin" Value="20,0"/>
+            </Style>
+        </Grid.Resources>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                </Style>
+            </Grid.Resources>
+            <Label Content="Járművek száma ezen a profilon:" HorizontalAlignment="Left" FontSize="8"/>
+            <Label Content="0" HorizontalAlignment="Left" Margin="130,0,0,0" FontSize="8"/>
+            <Label Content="Autó márka:" Grid.Row="0"/>
+            <ComboBox Grid.Row="0" Grid.Column="1" Height="30" ItemsSource="{Binding JarmuModels}" SelectedItem="{Binding Filters.SelectedMarka}" SelectedIndex="0"/>
+            <Label Content="Évjárat:" Grid.Row="1"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                <Slider x:Name="year_SLDR" Width="220" VerticalAlignment="Center" Minimum="1900" Maximum="{Binding Source={x:Static sys:DateTime.Now}, Path=Year}" Value="{Binding Filters.SelectedEvjarat}" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                <Label Content="{Binding ElementName=year_SLDR, Path=Value}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Label Content="Lejárt forgalmi/biztosítás:" Grid.Row="2"/>
+            <CheckBox IsChecked="{Binding Filters.ForgalmiLejart}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Content="Forglmi"/>
+            <CheckBox IsChecked="{Binding Filters.BiztositasLejart}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Content="Biztosítás" Margin="70,0,0,0"/>
+            <Label Grid.Row="3" Content="Rendszám:"/>
+            <TextBox Text="{Binding Filters.RendszamSearch}" Grid.Row="3" Grid.Column="1" Height="30" VerticalContentAlignment="Center"/>
+            <Button Content="Keresés" Grid.Column="2" Grid.RowSpan="4" Click="Button_Click"/>
+        </Grid>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Grid.Row="1" ItemsSource="{Binding JarmuvekToShow}" SelectedItem="{Binding SelectedJarmu}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Rendszám" Width="Auto" Binding="{Binding rendszam}"/>
+                <DataGridTextColumn Header="Márka" Width="*" Binding="{Binding marka}"/>
+                <DataGridTextColumn Header="Forgalmi" Width="*" Binding="{Binding forgalmi}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Background" Value="{Binding forgalmi, Converter={StaticResource Lejarat}}"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Biztosítás" Width="*" Binding="{Binding biztositas}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Background" Value="{Binding biztositas, Converter={StaticResource Lejarat}}"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Évjárat" Width="Auto" Binding="{Binding evjarat}"/>
+                <DataGridTextColumn Header="Motorszám" Width="*" Binding="{Binding motorszam}"/>
+                <DataGridTextColumn Header="Alvázszám" Width="1.3*" Binding="{Binding alvazszam}"/>
+                <DataGridTextColumn Header="Forgalomba h." Width="Auto" Binding="{Binding forgalombah}"/>
+                <DataGridTextColumn Header="Model" Width="*" Binding="{Binding model}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <Button x:Name="new_BTN" Content="Új felvétel"/>
+            <Button x:Name="mod_BTN" Content="Módosítás"/>
+            <Button x:Name="del_BTN" Content="Törlés"/>
+        </StackPanel>
+    </Grid>
+</Window>

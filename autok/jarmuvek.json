@@ -1,0 +1,24 @@
+[
+  {
+    "rendszam": "ABC-123",
+    "marka": "Toyota",
+    "forgalmi": "2025-06-15",
+    "biztositas": "2025-12-31",
+    "evjarat": 2018,
+    "motorszam": "1NZFXE123456",
+    "alvazszam": "JTDKN3DU0A1234567",
+    "forgalombah": "2018-06-15",
+    "model": "Corolla Hybrid"
+  },
+  {
+    "rendszam": "XYZ-789",
+    "marka": "Volkswagen",
+    "forgalmi": "2026-09-22",
+    "biztositas": "2025-11-30",
+    "evjarat": 2020,
+    "motorszam": "DGF12345678",
+    "alvazszam": "WVWZZZ3CZLE123456",
+    "forgalombah": "2020-09-22",
+    "model": "Golf 8"
+  }
+]
