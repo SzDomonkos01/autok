@@ -106,6 +106,34 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         MessageBox.Show("Válassza ki a törlendő elemet!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
     }
 
+    private void mod_BTN_Click(object sender, RoutedEventArgs e)
+    {
+        if (SelectedJarmu != null)
+        {
+            int index = Jarmuvek.IndexOf(Jarmuvek.FirstOrDefault(x => x.evjarat == SelectedJarmu.evjarat));
+            Jarmu tmpJarmu = new Jarmu()
+            {
+                rendszam = SelectedJarmu.rendszam,
+                marka = SelectedJarmu.marka,
+                forgalmi = SelectedJarmu.forgalmi,
+                biztositas = SelectedJarmu.biztositas,
+                evjarat = SelectedJarmu.evjarat,
+                motorszam = SelectedJarmu.motorszam,
+                alvazszam = SelectedJarmu.alvazszam,
+                forgalombah = SelectedJarmu.forgalombah,
+                model = SelectedJarmu.model,
+            };
+            DataWindow dataWindow = new DataWindow(tmpJarmu);
+            dataWindow.ShowDialog();
+            if (dataWindow.DialogResult == true)
+            {
+                Jarmuvek[index] = dataWindow.Jarmu;
+                JarmuAdd(dataWindow.Jarmu.evjarat.ToString());
+                search_BTN_Click(sender, e);
+            }
+        }
+    }
+
     private void Window_Closed(object sender, EventArgs e)
     {
         string jsonStr = JsonSerializer.Serialize(Jarmuvek);
