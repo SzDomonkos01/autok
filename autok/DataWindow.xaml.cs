@@ -92,5 +92,10 @@ namespace autok
             }
         }
 
+        private void cancel_BTN_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
+        }
     }
 }

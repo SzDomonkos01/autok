@@ -90,4 +90,25 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             search_BTN_Click(sender, e);
         }
     }
+
+    private void del_BTN_Click(object sender, RoutedEventArgs e)
+    {
+        if (SelectedJarmu != null)
+        {
+            MessageBoxResult result = MessageBox.Show($"Biztosan törölni kívánja a(z) {SelectedJarmu.marka} - {SelectedJarmu.model} modellű autót?", "Megerősítés", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Jarmuvek.Remove(SelectedJarmu);
+                JarmuvekToShow.Remove(SelectedJarmu);
+            }
+            return;
+        }
+        MessageBox.Show("Válassza ki a törlendő elemet!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+    }
+
+    private void Window_Closed(object sender, EventArgs e)
+    {
+        string jsonStr = JsonSerializer.Serialize(Jarmuvek);
+        File.WriteAllText("jarmuvekjson", jsonStr);
+    }
 }

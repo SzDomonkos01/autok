@@ -64,7 +64,7 @@
         <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Jarmu.model}"/>
         <StackPanel Grid.Row="9" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="save_BTN" Content="Mentés" Margin="0,0,30,0" Click="save_BTN_Click"/>
-            <Button x:Name="cancel_BTN" Content="Mégse"/>
+            <Button x:Name="cancel_BTN" Content="Mégse" Click="cancel_BTN_Click"/>
         </StackPanel>
         
     </Grid>
