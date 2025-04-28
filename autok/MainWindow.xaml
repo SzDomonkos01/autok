@@ -136,7 +136,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
-            <Button x:Name="new_BTN" Content="Új felvétel"/>
+            <Button x:Name="new_BTN" Content="Új felvétel" Click="new_BTN_Click"/>
             <Button x:Name="mod_BTN" Content="Módosítás"/>
             <Button x:Name="del_BTN" Content="Törlés"/>
         </StackPanel>

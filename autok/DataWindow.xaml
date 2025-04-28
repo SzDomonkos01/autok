@@ -1,0 +1,71 @@
+﻿<Window x:Class="autok.DataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:autok"
+        mc:Ignorable="d"
+        Title="Autó adatainak módosítása/Új autó felvétele" Height="500" Width="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Width" Value="250"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Width" Value="80"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+        </Grid.Resources>
+        <Label Content="Rendszám:" Grid.Row="0"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Owner.rendszam}"/>
+        <Label Content="Márka:" Grid.Row="1"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Jarmu.marka}"/>
+        <Label Content="Forgalmi:" Grid.Row="2"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Jarmu.forgalmi}"/>
+        <Label Content="Biztosítás:" Grid.Row="3"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Jarmu.biztositas}"/>
+        <Label Content="Évjárat:" Grid.Row="4"/>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+            <Slider x:Name="year_SLDR" Width="180" VerticalAlignment="Center" Minimum="1900" Maximum="{Binding Source={x:Static sys:DateTime.Now}, Path=Year}" Value="{Binding Filters.SelectedEvjarat}" TickFrequency="1" IsSnapToTickEnabled="True"  Margin="20,0,0,0"/>
+            <Label Content="{Binding ElementName=year_SLDR, Path=Value}" VerticalAlignment="Center"/>
+        </StackPanel>
+        <Label Content="Motorszám:" Grid.Row="5"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Jarmu.motorszam}"/>
+        <Label Content="Alvázszám:" Grid.Row="6"/>
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Jarmu.alvazszam}"/>
+        <Label Content="Forgalomba helyezés:" Grid.Row="7"/>
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Jarmu.forgalombah}"/>
+        <Label Content="Model:" Grid.Row="8"/>
+        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Jarmu.model}"/>
+        <StackPanel Grid.Row="9" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="save_BTN" Content="Mentés" Margin="0,0,30,0"/>
+            <Button x:Name="cancel_BTN" Content="Mégse"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>
