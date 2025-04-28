@@ -139,4 +139,9 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         string jsonStr = JsonSerializer.Serialize(Jarmuvek);
         File.WriteAllText("jarmuvekjson", jsonStr);
     }
+
+    private void esc_BTN_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+    }
 }

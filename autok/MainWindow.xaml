@@ -139,6 +139,7 @@
             <Button x:Name="new_BTN" Content="Új felvétel" Click="new_BTN_Click"/>
             <Button x:Name="mod_BTN" Content="Módosítás" Click="mod_BTN_Click"/>
             <Button x:Name="del_BTN" Content="Törlés" Click="del_BTN_Click"/>
+            <Button x:Name="esc_BTN" Content="Kilépés" Click="esc_BTN_Click"/>
         </StackPanel>
     </Grid>
 </Window>

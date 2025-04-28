@@ -20,5 +20,93 @@
     "alvazszam": "WVWZZZ3CZLE123456",
     "forgalombah": "2020-09-22",
     "model": "Golf 8"
+  },
+  {
+    "rendszam": "KLD-156",
+    "marka": "Ford",
+    "forgalmi": "2028-09-22",
+    "biztositas": "2025-01-10",
+    "evjarat": 2015,
+    "motorszam": "NKDNDLDDKJD",
+    "alvazszam": "DKLMDLDMLDMDLDD",
+    "forgalombah": "2024-09-22",
+    "model": "Focus"
+  },
+  {
+    "rendszam": "SLC-489",
+    "marka": "Skoda",
+    "forgalmi": "2026-05-29",
+    "biztositas": "2025-11-30",
+    "evjarat": 2020,
+    "motorszam": "DGF1234k4k8",
+    "alvazszam": "WVWZFLJNIFZ3CZLE6",
+    "forgalombah": "2021-05-29",
+    "model": "Octavia"
+  },
+  {
+    "rendszam": "FCD-165",
+    "marka": "Mercedes-Benz",
+    "forgalmi": "2026-09-25",
+    "biztositas": "2025-12-03",
+    "evjarat": 2014,
+    "motorszam": "DGF15DDSFLD",
+    "alvazszam": "WLDJDDLDML23456",
+    "forgalombah": "2020-12-03",
+    "model": "GLA SUV"
+  },
+  {
+    "rendszam": "KCL-852",
+    "marka": "BMW",
+    "forgalmi": "2030-02-28",
+    "biztositas": "2025-05-12",
+    "evjarat": 2024,
+    "motorszam": "DPJDPD565DD",
+    "alvazszam": "WVWZZZ3CZLDLKDD6",
+    "forgalombah": "2025-02-28",
+    "model": "X3 SUV"
+  },
+  {
+    "rendszam": "DFF-646",
+    "marka": "Mercedes-Benz",
+    "forgalmi": "2026-06-15",
+    "biztositas": "2025-11-15",
+    "evjarat": 2016,
+    "motorszam": "AASDDKDDD54DD",
+    "alvazszam": "CVOCINVCHC44",
+    "forgalombah": "2020-06-15",
+    "model": "X7 SUV"
+  },
+  {
+    "rendszam": "FKD-164",
+    "marka": "Ford",
+    "forgalmi": "2026-01-02",
+    "biztositas": "2025-12-29",
+    "evjarat": 2022,
+    "motorszam": "DGJKDOIDSFLD",
+    "alvazszam": "WLDJDOD55SS56",
+    "forgalombah": "2022-01-02",
+    "model": "Mustang"
+  },
+  {
+    "rendszam": "LRO-888",
+    "marka": "Citoen",
+    "forgalmi": "2025-02-24",
+    "biztositas": "2026-11-03",
+    "evjarat": 2018,
+    "motorszam": "QLSMDSFLD",
+    "alvazszam": "WLS45DMDL44DD",
+    "forgalombah": "2016-02-24",
+    "model": "C4"
+  },
+  {
+    "rendszam": "ADC-123",
+    "marka": "Toyota",
+    "forgalmi": "2030-08-23",
+    "biztositas": "2028-02-14",
+    "evjarat": 2019,
+    "motorszam": "JDJDLOD45645",
+    "alvazszam": "WLD74DDLMKD73456",
+    "forgalombah": "2025-08-23",
+    "model": "Prius Plug-in Hybrid"
   }
 ]
