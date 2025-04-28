@@ -12,22 +12,22 @@
     </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.Resources>
             <Style TargetType="Button">
-                <Setter Property="Width" Value="200"/>
-                <Setter Property="Height" Value="40"/>
+                <Setter Property="Width" Value="80"/>
+                <Setter Property="Height" Value="30"/>
                 <Setter Property="Margin" Value="20,0"/>
             </Style>
         </Grid.Resources>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -44,30 +44,47 @@
             </Grid.Resources>
             <Label Content="Járművek száma ezen a profilon:" HorizontalAlignment="Left" FontSize="8"/>
             <Label Content="0" HorizontalAlignment="Left" Margin="130,0,0,0" FontSize="8"/>
-            <Label Content="Autó márka:" Grid.Row="0"/>
-            <ComboBox Grid.Row="0" Grid.Column="1" Height="30" ItemsSource="{Binding JarmuModels}" SelectedItem="{Binding Filters.SelectedMarka}" SelectedIndex="0"/>
+            <Label Content="Autómárka:" Grid.Row="0" Margin="0,0,0,0"/>
+            <ComboBox Grid.Row="0" Grid.Column="1" Height="30" Width="250" ItemsSource="{Binding JarmuModels}" SelectedItem="{Binding Filters.SelectedMarka}" SelectedIndex="0"/>
             <Label Content="Évjárat:" Grid.Row="1"/>
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                <Slider x:Name="year_SLDR" Width="220" VerticalAlignment="Center" Minimum="1900" Maximum="{Binding Source={x:Static sys:DateTime.Now}, Path=Year}" Value="{Binding Filters.SelectedEvjarat}" TickFrequency="1" IsSnapToTickEnabled="True"/>
-                <Label Content="{Binding ElementName=year_SLDR, Path=Value}" VerticalAlignment="Center"/>
+                <Slider x:Name="year_SLDR" Width="180" VerticalAlignment="Center" Minimum="1900" Maximum="{Binding Source={x:Static sys:DateTime.Now}, Path=Year}" Value="{Binding Filters.SelectedEvjarat}" TickFrequency="1" IsSnapToTickEnabled="True"  Margin="50,0,0,0"/>
+                <Label Content="{Binding ElementName=year_SLDR, Path=Value}" VerticalAlignment="Center" Margin="10,0,0,0"/>
             </StackPanel>
             <Label Content="Lejárt forgalmi/biztosítás:" Grid.Row="2"/>
-            <CheckBox IsChecked="{Binding Filters.ForgalmiLejart}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Content="Forglmi"/>
-            <CheckBox IsChecked="{Binding Filters.BiztositasLejart}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Content="Biztosítás" Margin="70,0,0,0"/>
+            <CheckBox IsChecked="{Binding Filters.ForgalmiLejart}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Content="Forgalmi" Margin="60,0,0,0"/>
+            <CheckBox IsChecked="{Binding Filters.BiztositasLejart}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Content="Biztosítás" Margin="200,0,0,0"/>
             <Label Grid.Row="3" Content="Rendszám:"/>
-            <TextBox Text="{Binding Filters.RendszamSearch}" Grid.Row="3" Grid.Column="1" Height="30" VerticalContentAlignment="Center"/>
-            <Button Content="Keresés" Grid.Column="2" Grid.RowSpan="4" Click="Button_Click"/>
+            <TextBox Text="{Binding Filters.RendszamSearch}" Grid.Row="3" Grid.Column="1" Height="30" Width="250" VerticalContentAlignment="Center"/>
+            <Button Content="Keresés" Grid.Column="2" Grid.RowSpan="4" x:Name="search_BTN" Click="search_BTN_Click"/>
         </Grid>
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Grid.Row="1" ItemsSource="{Binding JarmuvekToShow}" SelectedItem="{Binding SelectedJarmu}">
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Grid.Row="1" ItemsSource="{Binding JarmuvekToShow}" SelectedItem="{Binding SelectedJarmu}" HorizontalAlignment="Center" HorizontalContentAlignment="Center">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Rendszám" Width="Auto" Binding="{Binding rendszam}"/>
-                <DataGridTextColumn Header="Márka" Width="*" Binding="{Binding marka}"/>
+                <DataGridTextColumn Header="Rendszám" Width="Auto" Binding="{Binding rendszam}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Márka" Width="*" Binding="{Binding marka}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Forgalmi" Width="*" Binding="{Binding forgalmi}">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="Background" Value="{Binding forgalmi, Converter={StaticResource Lejarat}}"/>
                         </Style>
                     </DataGridTextColumn.CellStyle>
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Biztosítás" Width="*" Binding="{Binding biztositas}">
                     <DataGridTextColumn.CellStyle>
@@ -75,12 +92,47 @@
                             <Setter Property="Background" Value="{Binding biztositas, Converter={StaticResource Lejarat}}"/>
                         </Style>
                     </DataGridTextColumn.CellStyle>
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Évjárat" Width="Auto" Binding="{Binding evjarat}"/>
-                <DataGridTextColumn Header="Motorszám" Width="*" Binding="{Binding motorszam}"/>
-                <DataGridTextColumn Header="Alvázszám" Width="1.3*" Binding="{Binding alvazszam}"/>
-                <DataGridTextColumn Header="Forgalomba h." Width="Auto" Binding="{Binding forgalombah}"/>
-                <DataGridTextColumn Header="Model" Width="*" Binding="{Binding model}"/>
+                <DataGridTextColumn Header="Évjárat" Width="Auto" Binding="{Binding evjarat}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Motorszám" Width="*" Binding="{Binding motorszam}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Alvázszám" Width="1.3*" Binding="{Binding alvazszam}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Forgalomba h." Width="Auto" Binding="{Binding forgalombah}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Model" Width="*" Binding="{Binding model}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">

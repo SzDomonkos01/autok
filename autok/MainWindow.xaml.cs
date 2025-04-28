@@ -60,11 +60,11 @@ namespace autok
             JarmuvekToShow = JsonSerializer.Deserialize<ObservableCollection<Jarmu>>(jsonStr);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void search_BTN_Click(object sender, RoutedEventArgs e)
         {
             DateOnly ma = DateOnly.FromDateTime(DateTime.Today);
 
-            JarmuvekToShow = new (Jarmuvek.Where(jar =>
+            JarmuvekToShow = new(Jarmuvek.Where(jar =>
                 (string.IsNullOrEmpty(Filters.SelectedMarka) || jar.marka == Filters.SelectedMarka) &&
                 (!jar.evjarat.HasValue || jar.evjarat >= (int)Filters.SelectedEvjarat) &&
                 (!Filters.ForgalmiLejart || (jar.forgalmi.HasValue && jar.forgalmi.Value < ma)) &&
