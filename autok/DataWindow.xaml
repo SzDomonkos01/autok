@@ -42,7 +42,7 @@
             </Style>
         </Grid.Resources>
         <Label Content="Rendszám:" Grid.Row="0"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Owner.rendszam}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Jarmu.rendszam}"/>
         <Label Content="Márka:" Grid.Row="1"/>
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Jarmu.marka}"/>
         <Label Content="Forgalmi:" Grid.Row="2"/>
@@ -63,7 +63,7 @@
         <Label Content="Model:" Grid.Row="8"/>
         <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Jarmu.model}"/>
         <StackPanel Grid.Row="9" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="save_BTN" Content="Mentés" Margin="0,0,30,0"/>
+            <Button x:Name="save_BTN" Content="Mentés" Margin="0,0,30,0" Click="save_BTN_Click"/>
             <Button x:Name="cancel_BTN" Content="Mégse"/>
         </StackPanel>
         

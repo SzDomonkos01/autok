@@ -81,12 +81,12 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     }
     private void new_BTN_Click(object sender, RoutedEventArgs e)
     {
-        DataWindow dataWindow = new DataWindow(new Jarmu() { marka = Jarmuvek.Max(x => x.marka) + 1 });
+        DataWindow dataWindow = new DataWindow(new Jarmu() { evjarat = Jarmuvek.Max(x => x.evjarat) + 1 });
         dataWindow.ShowDialog();
         if(dataWindow.DialogResult == true)
         {
             Jarmuvek.Add(dataWindow.Jarmu);
-            JarmuAdd(dataWindow.Jarmu.marka);
+            JarmuAdd(dataWindow.Jarmu.evjarat.ToString());
             search_BTN_Click(sender, e);
         }
     }

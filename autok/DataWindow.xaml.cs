@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +22,8 @@ namespace autok
     /// </summary>
     public partial class DataWindow : Window
     {
-
+        public ObservableCollection<Jarmu>? Jarmuvek { get; set; }
+        public ObservableCollection<Jarmu>? JarmuvekToShow;
         public Jarmu Jarmu { get; set; }
 
         public DataWindow(Jarmu jarmu)
@@ -32,9 +35,9 @@ namespace autok
 
         private bool InputCheck()
         {
-            if (String.IsNullOrWhiteSpace(Jarmu.rendszam))
+            if (Jarmu.rendszam?.Length != 7)
             {
-                MessageBox.Show("Az autó rendszámának megadása kötelező!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Érvényes rendszám megadása kötelező!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             if (String.IsNullOrWhiteSpace(Jarmu.marka))
@@ -52,7 +55,7 @@ namespace autok
                 MessageBox.Show("Az autó biztosításának kiadási dátumát kötelező megadni!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            if (!Jarmu.evjarat.HasValue)
+            if (Jarmu.evjarat > 2025 || Jarmu.evjarat < 1900)
             {
                 MessageBox.Show("Az autó gyártási évét kötelező megadni!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -79,5 +82,15 @@ namespace autok
             }
             return true;
         }
+
+        private void save_BTN_Click(object sender, RoutedEventArgs e)
+        {
+            if (InputCheck())
+            {
+                this.DialogResult = true;
+                this.Close();
+            }
+        }
+
     }
 }
