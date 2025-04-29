@@ -17,6 +17,7 @@ namespace autok
         public string? alvazszam { get; set; }
         public DateOnly? forgalombah { get; set; }
         public string? model { get; set; }
+        public string? tulajEmail { get; set; }
     }
 
 }

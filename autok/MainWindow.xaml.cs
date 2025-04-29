@@ -21,6 +21,9 @@ namespace autok;
 /// </summary>
 public partial class MainWindow : Window, INotifyPropertyChanged
 {
+
+    public Felhasznalo AktivFelhasznalo { get; set; }
+
     public ObservableCollection<Jarmu>? Jarmuvek { get; set; }
 
     public ObservableCollection<string> JarmuModels { get; set; }
@@ -45,19 +48,66 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
     public MainWindow()
     {
+        var loginWindow = new LoginWindow();
+        bool? sikeres = loginWindow.ShowDialog();
+
+        if (sikeres != true)
+        {
+            Application.Current.Shutdown();
+            return;
+        }
+
+        AktivFelhasznalo = loginWindow.BelepettFelhasznalo;
+
         InitializeComponent();
         this.DataContext = this;
         FileRead();
+        EllenorizLejaratokat();
         JarmuModels = new(Jarmuvek.Select(x => x.marka).Distinct().Order());
         JarmuModels.Insert(0, "");
+
+        EllenorizLejaratokat();
     }
 
     private void FileRead()
     {
         string jsonStr = File.ReadAllText("jarmuvek.json");
-        Jarmuvek = JsonSerializer.Deserialize<ObservableCollection<Jarmu>>(jsonStr);
-        JarmuvekToShow = JsonSerializer.Deserialize<ObservableCollection<Jarmu>>(jsonStr);
+        var osszes = JsonSerializer.Deserialize<ObservableCollection<Jarmu>>(jsonStr);
+        Jarmuvek = new(osszes.Where(j => j.tulajEmail == AktivFelhasznalo.Email));
+        JarmuvekToShow = new ObservableCollection<Jarmu>(Jarmuvek);
     }
+
+    private void EllenorizLejaratokat()
+    {
+        foreach (var jarmu in JarmuvekToShow!)
+        {
+            if (string.IsNullOrEmpty(jarmu.tulajEmail)) continue;
+
+            EllenorizDatum(jarmu.forgalmi, jarmu.tulajEmail, jarmu.rendszam!, "forgalmi");
+            EllenorizDatum(jarmu.biztositas, jarmu.tulajEmail, jarmu.rendszam!, "biztosítás");
+        }
+    }
+
+    private void EllenorizDatum(DateOnly? datum, string email, string rendszam, string tipus)
+    {
+        if (!datum.HasValue) return;
+
+        var hatralevoNap = (datum.Value.ToDateTime(TimeOnly.MinValue) - DateTime.Now).TotalDays;
+
+        if (hatralevoNap <= 0)
+        {
+            EmailSender.Send(email, $"{tipus} lejárt", $"Figyelem! A(z) {rendszam} rendszámú jármű {tipus} érvényessége lejárt.");
+        }
+        else if (hatralevoNap <= 30)
+        {
+            EmailSender.Send(email, $"{tipus} hamarosan lejár", $"Figyelem! A(z) {rendszam} rendszámú jármű {tipus} érvényessége kevesebb mint 1 hónap múlva lejár.");
+        }
+        else if (hatralevoNap <= 60)
+        {
+            EmailSender.Send(email, $"{tipus} lejárat közeleg", $"Emlékeztető: A(z) {rendszam} rendszámú jármű {tipus} érvényessége kevesebb mint 2 hónap múlva lejár.");
+        }
+    }
+
 
     private void search_BTN_Click(object sender, RoutedEventArgs e)
     {
