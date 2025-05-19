@@ -9,9 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="felhasznalok.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="jarmuvek.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

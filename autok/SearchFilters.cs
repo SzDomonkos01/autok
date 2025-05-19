@@ -16,8 +16,8 @@ namespace autok
             set { selectedMarka = value; OnPropertyChanged(nameof(SelectedMarka)); }
         }
 
-        private int selectedEvjarat;
-        public int SelectedEvjarat
+        private double selectedEvjarat;
+        public double SelectedEvjarat
         {
             get => selectedEvjarat;
             set { selectedEvjarat = value; OnPropertyChanged(nameof(SelectedEvjarat)); }
